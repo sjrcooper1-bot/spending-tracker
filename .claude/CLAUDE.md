@@ -10,14 +10,17 @@
 ## Tech Stack
 | Layer | Tool | Version |
 |-------|------|---------|
-| UI | Vanilla HTML/CSS/JS | ES2022 |
+| Framework | React | 18.x |
+| Styling | Tailwind CSS | 3.x |
 | CSV parsing | Papa Parse | 5.x |
 | Excel parsing | SheetJS (xlsx) | 0.18.x |
 | Charts | Chart.js | 4.x |
-| Dev server | serve (npx) | latest |
+| PDF export | jsPDF + html2canvas | latest |
+| Build | Vite | latest |
 | Tests | Vitest | latest |
+| Deployment | Vercel (static export) | — |
 
-No framework. No build step for development. The app runs entirely in the browser.
+React + Vite for the build. All processing is client-side — no backend, no server.
 
 ---
 
@@ -66,13 +69,17 @@ spending-tracker/
 
 ## Key Commands
 ```bash
-# Dev server (serves /public on localhost:3000)
-npx serve public -l 3000
+# Dev server
+npm run dev
 
 # Run tests
 npm test
 
-# No build step needed for development
+# Build for production
+npm run build
+
+# Deploy to Vercel
+vercel --prod
 ```
 
 ---

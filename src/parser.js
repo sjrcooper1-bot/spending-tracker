@@ -1,8 +1,9 @@
 /**
  * parser.js
  * Converts uploaded File objects (CSV or Excel) into a flat transaction array.
- * Relies on Papa Parse (CSV) and SheetJS (Excel) loaded via CDN in index.html.
  */
+import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 /**
  * Parse a single File into an array of raw transaction objects.
