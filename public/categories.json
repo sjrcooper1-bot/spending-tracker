@@ -1,22 +1,42 @@
 [
   {
-    "category": "Finance & Insurance",
+    "category": "Debt & Repayments",
     "colour": "#94a3b8",
     "keywords": [
       "hmrc", "tax", "inland revenue",
       "american express", "amex",
       "b/card", "barclaycard",
       "credit card", "coventry cc",
-      "insuran", "insurance", "ins dd",
-      "greenlight", "howden", "reassure", "aviva", "axa", "legal & general",
       "hlam", "savin", "savings",
       "pension", "investment",
-      "bank charge", "overdraft", "interest",
+      "overdraft",
       "standing order", "direct debit",
-      "tesco insurance", "tesco bank",
+      "tesco bank",
       "revolut",
-      "klarna",
-      "paypal"
+      "paypal",
+      "loan"
+    ]
+  },
+  {
+    "category": "Bank Charges",
+    "colour": "#f87171",
+    "keywords": [
+      "bank charge", "bank fee",
+      "interest charged", "interest payment",
+      "foreign exchange", "currency exchange", "fx fee",
+      "non-sterling", "non sterling",
+      "cash withdrawal fee", "atm fee",
+      "service charge", "monthly fee",
+      "arrangement fee"
+    ]
+  },
+  {
+    "category": "Insurance",
+    "colour": "#6366f1",
+    "keywords": [
+      "insuran", "insurance", "ins dd",
+      "greenlight", "howden", "reassure", "aviva", "axa", "legal & general",
+      "tesco insurance"
     ]
   },
   {
@@ -91,6 +111,7 @@
       "argos", "currys", "john lewis", "ikea", "b&q", "homebase",
       "b&m", "matalan", "card factory",
       "vinted", "shein",
+      "klarna*",
       "bloomingdale", "groupon",
       "pets at home", "pet shop",
       "max spielmann",

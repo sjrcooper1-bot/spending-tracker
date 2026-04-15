@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { parseFiles } from './parser.js';
 import { categoriseAll } from './categoriser.js';
+import { loadLearnedRules, saveLearnedRule, applyLearnedRules } from './learnedRules.js';
 import DropZone from './components/DropZone.jsx';
 import FileCard from './components/FileCard.jsx';
 import ErrorBanner from './components/ErrorBanner.jsx';
@@ -18,6 +19,8 @@ export default function App() {
   const [categoryRules, setCategoryRules] = useState([]);
   // 'upload' | 'analysis'
   const [view, setView] = useState('upload');
+  // Manual overrides: { [transactionIndex]: categoryName }
+  const [categoryOverrides, setCategoryOverrides] = useState({});
 
   // Load category rules once on mount
   useEffect(() => {
@@ -45,6 +48,8 @@ export default function App() {
 
       const newTransactions = await parseFiles(filesToParse);
       categoriseAll(newTransactions, categoryRules);
+      // Apply anything the user has previously taught the app
+      applyLearnedRules(newTransactions, loadLearnedRules());
 
       // Build file cards from the actual parsed results
       const newFileCards = filesToParse.map(f => ({
@@ -67,9 +72,16 @@ export default function App() {
     setError(null);
   }
 
+  function handleOverride(index, category) {
+    setCategoryOverrides(prev => ({ ...prev, [index]: category }));
+    // Persist so future uploads with the same description are auto-categorised
+    saveLearnedRule(transactions[index].description, category);
+  }
+
   function handleClearAll() {
     setUploadedFiles([]);
     setTransactions([]);
+    setCategoryOverrides({});
     setError(null);
     setView('upload');
   }
@@ -104,6 +116,8 @@ export default function App() {
           <AnalysisView
             transactions={transactions}
             categoryRules={categoryRules}
+            categoryOverrides={categoryOverrides}
+            onOverride={handleOverride}
             onBack={() => setView('upload')}
           />
         ) : (
@@ -155,7 +169,14 @@ export default function App() {
             )}
 
             {/* Transaction preview */}
-            {hasFiles && <TransactionTable transactions={transactions} />}
+            {hasFiles && (
+              <TransactionTable
+                transactions={transactions}
+                categoryRules={categoryRules}
+                categoryOverrides={categoryOverrides}
+                onOverride={handleOverride}
+              />
+            )}
           </>
         )}
 

@@ -8,7 +8,7 @@ Chart.register(ArcElement, Tooltip, Legend, DoughnutController);
  * Doughnut chart of spend by category using Chart.js.
  * @param {Array} breakdown — [{category, total, percentage, colour}]
  */
-export default function SpendingChart({ breakdown }) {
+export default function SpendingChart({ breakdown, onCategoryClick }) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -40,6 +40,11 @@ export default function SpendingChart({ breakdown }) {
         responsive: true,
         maintainAspectRatio: true,
         cutout: '60%',
+        onClick(event, elements) {
+          if (elements.length > 0 && onCategoryClick) {
+            onCategoryClick(breakdown[elements[0].index].category);
+          }
+        },
         plugins: {
           legend: {
             display: false, // we render our own legend in the table
@@ -64,7 +69,7 @@ export default function SpendingChart({ breakdown }) {
 
   return (
     <div className="flex justify-center">
-      <div className="w-64 h-64">
+      <div className="w-64 h-64 cursor-pointer">
         <canvas ref={canvasRef} />
       </div>
     </div>

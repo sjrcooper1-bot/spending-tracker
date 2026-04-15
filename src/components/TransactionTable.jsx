@@ -1,7 +1,7 @@
 /**
  * TransactionTable
  * Preview table of all parsed transactions before analysis.
- * Shows date, description, amount, category, and source file.
+ * Each row has a category dropdown so the user can override the auto-assigned category.
  */
 
 const CATEGORY_COLOURS = {
@@ -14,28 +14,24 @@ const CATEGORY_COLOURS = {
   'Shopping':               'bg-yellow-100 text-yellow-700',
   'Health & Wellbeing':     'bg-emerald-100 text-emerald-700',
   'Entertainment':          'bg-pink-100 text-pink-700',
-  'Finance & Insurance':    'bg-slate-100 text-slate-600',
+  'Debt & Repayments':      'bg-slate-100 text-slate-600',
+  'Bank Charges':           'bg-red-100 text-red-600',
+  'Insurance':              'bg-indigo-100 text-indigo-700',
   'Uncategorised':          'bg-amber-100 text-amber-700',
 };
-
-function CategoryBadge({ category }) {
-  const colour = CATEGORY_COLOURS[category] ?? 'bg-gray-100 text-gray-600';
-  return (
-    <span className={`inline-block text-xs font-medium px-2 py-0.5 rounded-full ${colour}`}>
-      {category}
-    </span>
-  );
-}
 
 function formatAmount(amount) {
   const abs = Math.abs(amount).toFixed(2);
   return amount < 0 ? `-£${abs}` : `+£${abs}`;
 }
 
-export default function TransactionTable({ transactions }) {
+export default function TransactionTable({ transactions, categoryRules, categoryOverrides, onOverride }) {
   if (!transactions.length) return null;
 
-  const uncategorisedCount = transactions.filter(t => t.category === 'Uncategorised').length;
+  const categoryNames = categoryRules.map(r => r.category);
+  const uncategorisedCount = transactions.filter((t, i) =>
+    (categoryOverrides[i] ?? t.category) === 'Uncategorised'
+  ).length;
 
   return (
     <div className="space-y-3">
@@ -65,19 +61,45 @@ export default function TransactionTable({ transactions }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-white">
-            {transactions.map((t, i) => (
-              <tr key={i} className="hover:bg-gray-50 transition-colors">
-                <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">{t.date}</td>
-                <td className="px-4 py-2.5 text-gray-800 max-w-xs truncate">{t.description}</td>
-                <td className={`px-4 py-2.5 text-right font-mono whitespace-nowrap ${t.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
-                  {formatAmount(t.amount)}
-                </td>
-                <td className="px-4 py-2.5">
-                  <CategoryBadge category={t.category} />
-                </td>
-                <td className="px-4 py-2.5 text-gray-400 text-xs truncate max-w-[140px]">{t.source}</td>
-              </tr>
-            ))}
+            {transactions.map((t, i) => {
+              const effectiveCategory = categoryOverrides[i] ?? t.category;
+              const isOverridden = categoryOverrides[i] !== undefined && categoryOverrides[i] !== t.category;
+              const colourClass = CATEGORY_COLOURS[effectiveCategory] ?? 'bg-gray-100 text-gray-600';
+
+              return (
+                <tr key={i} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-4 py-2.5 text-gray-500 whitespace-nowrap">{t.date}</td>
+                  <td className="px-4 py-2.5 text-gray-800 max-w-xs truncate">{t.description}</td>
+                  <td className={`px-4 py-2.5 text-right font-mono whitespace-nowrap ${t.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                    {formatAmount(t.amount)}
+                  </td>
+                  <td className="px-4 py-2.5">
+                    <div className="relative inline-block">
+                      <select
+                        value={effectiveCategory}
+                        onChange={e => onOverride(i, e.target.value)}
+                        className={`text-xs font-medium pl-2 pr-6 py-0.5 rounded-full appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 ${colourClass} ${isOverridden ? 'ring-1 ring-blue-300' : ''}`}
+                        aria-label={`Category for ${t.description}`}
+                      >
+                        {categoryNames.map(name => (
+                          <option key={name} value={name}>{name}</option>
+                        ))}
+                      </select>
+                      {/* Chevron icon */}
+                      <svg
+                        className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 opacity-50"
+                        width="10" height="10" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" strokeWidth="2.5"
+                        aria-hidden="true"
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </td>
+                  <td className="px-4 py-2.5 text-gray-400 text-xs truncate max-w-[140px]">{t.source}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
