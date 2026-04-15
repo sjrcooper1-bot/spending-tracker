@@ -5,6 +5,7 @@ import DropZone from './components/DropZone.jsx';
 import FileCard from './components/FileCard.jsx';
 import ErrorBanner from './components/ErrorBanner.jsx';
 import TransactionTable from './components/TransactionTable.jsx';
+import AnalysisView from './components/AnalysisView.jsx';
 
 export default function App() {
   // Each entry: { filename: string, rowCount: number }
@@ -15,6 +16,8 @@ export default function App() {
   const [parsing, setParsing] = useState(false);
   // Category rules loaded from categories.json
   const [categoryRules, setCategoryRules] = useState([]);
+  // 'upload' | 'analysis'
+  const [view, setView] = useState('upload');
 
   // Load category rules once on mount
   useEffect(() => {
@@ -68,6 +71,7 @@ export default function App() {
     setUploadedFiles([]);
     setTransactions([]);
     setError(null);
+    setView('upload');
   }
 
   const hasFiles = uploadedFiles.length > 0;
@@ -95,54 +99,66 @@ export default function App() {
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8 space-y-6">
-        {/* Drop zone */}
-        <DropZone onFiles={handleFiles} disabled={parsing} />
 
-        {/* Error */}
-        <ErrorBanner message={error} onDismiss={() => setError(null)} />
+        {view === 'analysis' ? (
+          <AnalysisView
+            transactions={transactions}
+            categoryRules={categoryRules}
+            onBack={() => setView('upload')}
+          />
+        ) : (
+          <>
+            {/* Drop zone */}
+            <DropZone onFiles={handleFiles} disabled={parsing} />
 
-        {/* Loading indicator */}
-        {parsing && (
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-            </svg>
-            Parsing file…
-          </div>
+            {/* Error */}
+            <ErrorBanner message={error} onDismiss={() => setError(null)} />
+
+            {/* Loading indicator */}
+            {parsing && (
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+                Parsing file…
+              </div>
+            )}
+
+            {/* File cards */}
+            {hasFiles && (
+              <div className="space-y-2">
+                <p className="text-xs text-gray-400 uppercase tracking-wide font-medium">Loaded files</p>
+                <div className="space-y-2">
+                  {uploadedFiles.map(f => (
+                    <FileCard
+                      key={f.filename}
+                      filename={f.filename}
+                      rowCount={f.rowCount}
+                      onRemove={() => handleRemoveFile(f.filename)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Analyse button */}
+            {hasFiles && (
+              <div className="flex justify-end">
+                <button
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50"
+                  disabled={parsing}
+                  onClick={() => setView('analysis')}
+                >
+                  Analyse spending →
+                </button>
+              </div>
+            )}
+
+            {/* Transaction preview */}
+            {hasFiles && <TransactionTable transactions={transactions} />}
+          </>
         )}
 
-        {/* File cards */}
-        {hasFiles && (
-          <div className="space-y-2">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-medium">Loaded files</p>
-            <div className="space-y-2">
-              {uploadedFiles.map(f => (
-                <FileCard
-                  key={f.filename}
-                  filename={f.filename}
-                  rowCount={f.rowCount}
-                  onRemove={() => handleRemoveFile(f.filename)}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Analyse button */}
-        {hasFiles && (
-          <div className="flex justify-end">
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50"
-              disabled={parsing}
-              onClick={() => {/* Phase 2 */}}
-            >
-              Analyse spending →
-            </button>
-          </div>
-        )}
-
-        {/* Transaction preview */}
-        {hasFiles && <TransactionTable transactions={transactions} />}
       </main>
     </div>
   );
