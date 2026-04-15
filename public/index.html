@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spending Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- CDN libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>Spending Tracker</h1>
+    <p class="subtitle">Upload bank statements to see where your money goes — privately, in your browser.</p>
+  </header>
+
+  <main>
+
+    <!-- Upload zone -->
+    <section id="upload-section">
+      <div id="drop-zone" role="button" tabindex="0" aria-label="Upload files">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p>Drag &amp; drop CSV or Excel files here</p>
+        <p class="hint">or click to browse</p>
+        <input type="file" id="file-input" multiple accept=".csv,.xlsx,.xls" hidden />
+      </div>
+      <div id="file-list"></div>
+      <div id="error-banner" class="hidden"></div>
+    </section>
+
+    <!-- Results (hidden until files processed) -->
+    <section id="results" class="hidden">
+
+      <!-- Summary cards -->
+      <div class="card-row">
+        <div class="card">
+          <span class="card-label">Total Income</span>
+          <span class="card-value" id="stat-income">—</span>
+        </div>
+        <div class="card">
+          <span class="card-label">Total Spend</span>
+          <span class="card-value" id="stat-spend">—</span>
+        </div>
+        <div class="card">
+          <span class="card-label">Net</span>
+          <span class="card-value" id="stat-net">—</span>
+        </div>
+        <div class="card">
+          <span class="card-label">Transactions</span>
+          <span class="card-value" id="stat-transactions">—</span>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-row">
+        <div class="chart-box">
+          <h2>Spend by Category</h2>
+          <canvas id="barChart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h2>Proportion of Spend</h2>
+          <canvas id="doughnutChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Category summary table -->
+      <div class="table-section">
+        <h2>Category Summary</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th class="num">Total</th>
+              <th class="num">%</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="category-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- All transactions table -->
+      <div class="table-section">
+        <h2>All Transactions</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th class="num">Amount</th>
+              <th>Category</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="transaction-tbody"></tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>All data stays in your browser. Nothing is sent anywhere.</p>
+  </footer>
+
+  <script type="module">
+    import { parseFiles } from '../src/parser.js';
+    import { categoriseAll } from '../src/categoriser.js';
+    import { render } from '../src/renderer.js';
+
+    let allTransactions = [];
+
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    const errorBanner = document.getElementById('error-banner');
+
+    // Click to open file picker
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+
+    // Drag and drop
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+    async function handleFiles(files) {
+      hideError();
+      try {
+        const newTransactions = await parseFiles(files);
+        categoriseAll(newTransactions);
+        allTransactions = [...allTransactions, ...newTransactions];
+        updateFileList(files);
+        render(allTransactions);
+      } catch (err) {
+        showError(err.message);
+      }
+    }
+
+    function updateFileList(files) {
+      const items = Array.from(files).map(f =>
+        `<span class="file-tag">${f.name}</span>`
+      ).join('');
+      fileList.innerHTML += items;
+    }
+
+    function showError(msg) {
+      errorBanner.textContent = msg;
+      errorBanner.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorBanner.classList.add('hidden');
+    }
+  </script>
+
+</body>
+</html>
