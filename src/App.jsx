@@ -125,6 +125,18 @@ export default function App() {
             {/* Drop zone */}
             <DropZone onFiles={handleFiles} disabled={parsing} />
 
+            {/* Privacy notice */}
+            <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg px-4 py-3 text-sm">
+              <svg className="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <span>
+                <strong>Before uploading:</strong> make sure your file contains only transaction rows — no account numbers, sort codes, or other personal details. Most banks let you export a transactions-only CSV from your online banking portal.
+              </span>
+            </div>
+
             {/* Error */}
             <ErrorBanner message={error} onDismiss={() => setError(null)} />
 
