@@ -1,53 +1,122 @@
 [
   {
+    "category": "Finance & Insurance",
+    "colour": "#94a3b8",
+    "keywords": [
+      "hmrc", "tax", "inland revenue",
+      "american express", "amex",
+      "b/card", "barclaycard",
+      "credit card", "coventry cc",
+      "insuran", "insurance", "ins dd",
+      "greenlight", "howden", "reassure", "aviva", "axa", "legal & general",
+      "hlam", "savin", "savings",
+      "pension", "investment",
+      "bank charge", "overdraft", "interest",
+      "standing order", "direct debit",
+      "tesco insurance", "tesco bank",
+      "revolut",
+      "klarna",
+      "paypal"
+    ]
+  },
+  {
     "category": "Groceries",
     "colour": "#4ade80",
-    "keywords": ["tesco", "sainsbury", "asda", "morrisons", "waitrose", "aldi", "lidl", "co-op", "marks & spencer food", "m&s food", "ocado", "iceland"]
+    "keywords": [
+      "tesco", "sainsbury", "asda", "adsa", "morrisons",
+      "waitrose", "aldi", "lidl", "co-op", "coop",
+      "marks & spencer food", "m&s food",
+      "ocado", "iceland",
+      "farm shop", "farm store",
+      "oakes farm"
+    ]
   },
   {
     "category": "Restaurants & Takeaways",
     "colour": "#fb923c",
-    "keywords": ["mcdonald", "kfc", "burger king", "subway", "greggs", "nando", "pizza", "deliveroo", "uber eats", "just eat", "restaurant", "cafe", "coffee", "starbucks", "costa", "pret"]
+    "keywords": [
+      "mcdonald", "kfc", "burger king", "subway", "greggs",
+      "nando", "pizza", "deliveroo", "uber eats", "just eat",
+      "restaurant", "cafe", "coffee", "starbucks", "costa", "pret",
+      "harpers ices", "ices", "sumup *cj"
+    ]
   },
   {
     "category": "Transport",
     "colour": "#60a5fa",
-    "keywords": ["tfl travel", "tfl charge", "trainline", "national rail", "avanti", "gwr", "crosscountry", " bus ", "bolt", "parking", "petrol", "fuel", "shell petrol", "bp petrol", "esso", "motoring"]
+    "keywords": [
+      "tfl travel", "tfl charge",
+      "trainline", "national rail", "avanti", "gwr", "crosscountry",
+      " bus ", "bolt", "parking",
+      "petrol", "fuel", "shell petrol", "bp petrol", "esso", "motoring",
+      "uber"
+    ]
   },
   {
     "category": "Housing",
     "colour": "#a78bfa",
-    "keywords": ["rent", "mortgage", "council tax", "estate agent", "letting"]
+    "keywords": [
+      "rent", " rnt ", "mortgage",
+      "council tax",
+      "estate agent", "letting",
+      "accommodation", "smyth p rnt"
+    ]
   },
   {
     "category": "Utilities",
     "colour": "#38bdf8",
-    "keywords": ["british gas", "eon", "octopus", "bulb", "thames water", "anglian water", "severn trent", "electricity", "water bill", "bt group", "virgin media", "sky broadband", "broadband"]
+    "keywords": [
+      "british gas", "eon", "octopus", "bulb",
+      "thames water", "anglian water", "severn trent",
+      "electricity", "water bill",
+      "bt group", "virgin media", "sky broadband", "broadband",
+      "tv licence"
+    ]
   },
   {
     "category": "Subscriptions",
     "colour": "#e879f9",
-    "keywords": ["netflix", "spotify", "apple", "amazon prime", "disney", "youtube premium", "adobe", "microsoft 365", "office 365", "google one", "dropbox", "gym", "membership"]
+    "keywords": [
+      "netflix", "spotify", "apple", "amazon prime",
+      "disney", "youtube premium",
+      "adobe", "microsoft 365", "office 365", "google one", "dropbox",
+      "gym", "membership", "zumba"
+    ]
   },
   {
     "category": "Shopping",
     "colour": "#facc15",
-    "keywords": ["amazon", "ebay", "asos", "next", "primark", "h&m", "zara", "argos", "currys", "john lewis", "ikea", "b&q", "homebase"]
+    "keywords": [
+      "amazon", "ebay", "asos", "next", "primark", "h&m", "zara",
+      "argos", "currys", "john lewis", "ikea", "b&q", "homebase",
+      "b&m", "matalan", "card factory",
+      "vinted", "shein",
+      "bloomingdale", "groupon",
+      "pets at home", "pet shop",
+      "max spielmann",
+      "british supplem"
+    ]
   },
   {
     "category": "Health & Wellbeing",
     "colour": "#34d399",
-    "keywords": ["pharmacy", "boots", "lloyds pharmacy", "superdrug", "dentist", "doctor", "nhs", "optician", "specsavers"]
+    "keywords": [
+      "pharmacy", "boots", "lloyds pharmacy", "superdrug",
+      "dentist", "dental",
+      "doctor", "nhs", "optician", "specsavers",
+      "fitness", "coventry fit"
+    ]
   },
   {
     "category": "Entertainment",
     "colour": "#f472b6",
-    "keywords": ["cinema", "vue", "odeon", "cineworld", "theatre", "ticketmaster", "eventbrite", "steam", "playstation", "xbox", "nintendo"]
-  },
-  {
-    "category": "Finance & Insurance",
-    "colour": "#94a3b8",
-    "keywords": ["bank charge", "interest", "overdraft", "insurance", "standing order", "direct debit", "savings", "investment", "pension"]
+    "keywords": [
+      "cinema", "vue", "odeon", "cineworld",
+      "theatre", "albany theatre",
+      "ticketmaster", "eventbrite",
+      "steam", "playstation", "xbox", "nintendo",
+      "groupon"
+    ]
   },
   {
     "category": "Uncategorised",

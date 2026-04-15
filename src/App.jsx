@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { parseFiles } from './parser.js';
-import { categoriseAll, DEFAULT_RULES } from './categoriser.js';
+import { categoriseAll } from './categoriser.js';
 import DropZone from './components/DropZone.jsx';
 import FileCard from './components/FileCard.jsx';
 import ErrorBanner from './components/ErrorBanner.jsx';
@@ -13,6 +13,16 @@ export default function App() {
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
   const [parsing, setParsing] = useState(false);
+  // Category rules loaded from categories.json
+  const [categoryRules, setCategoryRules] = useState([]);
+
+  // Load category rules once on mount
+  useEffect(() => {
+    fetch('/categories.json')
+      .then(r => r.json())
+      .then(setCategoryRules)
+      .catch(() => setError('Could not load category rules. Check that public/categories.json exists.'));
+  }, []);
 
   async function handleFiles(fileList) {
     setError(null);
@@ -31,7 +41,7 @@ export default function App() {
       }
 
       const newTransactions = await parseFiles(filesToParse);
-      categoriseAll(newTransactions, DEFAULT_RULES);
+      categoriseAll(newTransactions, categoryRules);
 
       // Build file cards from the actual parsed results
       const newFileCards = filesToParse.map(f => ({
