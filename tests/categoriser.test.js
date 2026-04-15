@@ -14,6 +14,7 @@ describe('categorise()', () => {
 
   it('matches transport', () => {
     expect(categorise('TFL TRAVEL CHARGE')).toBe('Transport');
+    expect(categorise('TRAINLINE BOOKING')).toBe('Transport');
   });
 
   it('matches subscriptions', () => {

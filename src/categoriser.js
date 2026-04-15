@@ -7,7 +7,7 @@
 export const DEFAULT_RULES = [
   { category: 'Groceries',       keywords: ['tesco', 'sainsbury', 'asda', 'morrisons', 'waitrose', 'aldi', 'lidl', 'co-op', 'marks & spencer food', 'm&s food', 'ocado', 'iceland'] },
   { category: 'Eating Out',      keywords: ['mcdonald', 'kfc', 'burger king', 'subway', 'greggs', 'nando', 'pizza', 'deliveroo', 'uber eats', 'just eat', 'restaurant', 'cafe', 'coffee', 'starbucks', 'costa', 'pret'] },
-  { category: 'Transport',       keywords: ['tfl', 'trainline', 'national rail', 'avanti', 'gwr', 'crosscountry', 'bus', 'uber', 'bolt', 'parking', 'petrol', 'fuel', 'shell', 'bp', 'esso', 'motoring'] },
+  { category: 'Transport',       keywords: ['tfl travel', 'tfl charge', 'trainline', 'national rail', 'avanti', 'gwr', 'crosscountry', ' bus ', 'uber', 'bolt', 'parking', 'petrol', 'fuel', 'shell petrol', 'bp petrol', 'esso', 'motoring'] },
   { category: 'Housing',         keywords: ['rent', 'mortgage', 'council tax', 'estate agent', 'letting'] },
   { category: 'Utilities',       keywords: ['british gas', 'eon', 'octopus', 'bulb', 'thames water', 'anglian water', 'severn trent', 'electricity', 'gas', 'water bill', 'bt group', 'virgin media', 'sky broadband', 'broadband', 'internet'] },
   { category: 'Subscriptions',   keywords: ['netflix', 'spotify', 'apple', 'amazon prime', 'disney', 'youtube premium', 'adobe', 'microsoft 365', 'office 365', 'google one', 'dropbox', 'gym', 'membership'] },
