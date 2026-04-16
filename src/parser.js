@@ -98,11 +98,15 @@ const AMOUNT_RE = /^-?[£$€]?\s*[\d,]+\.?\d*$|^\([\d,]+\.?\d*\)$/;
 function firstRowLooksLikeHeaders(rows) {
   if (!rows || !rows.length) return false;
   const firstRow = Array.isArray(rows[0]) ? rows[0] : Object.keys(rows[0]);
+  const hasDate = firstRow.some(cell => DATE_RE.test(String(cell).trim()));
+  const hasAmount = firstRow.some(cell => AMOUNT_RE.test(String(cell).trim().replace(/[£$€,\s]/g, '')));
+  // If the first row contains both a date and an amount, it's definitely a data row
+  if (hasDate && hasAmount) return false;
+  // Otherwise fall back to majority check
   const dataLikeCells = firstRow.filter(cell => {
     const s = String(cell).trim();
     return DATE_RE.test(s) || AMOUNT_RE.test(s.replace(/[£$€,\s]/g, ''));
   });
-  // If more than half the cells look like data values, there are no headers
   return dataLikeCells.length < firstRow.length / 2;
 }
 
