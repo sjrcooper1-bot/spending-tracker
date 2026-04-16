@@ -7,8 +7,7 @@
       "american express", "amex",
       "b/card", "barclaycard",
       "credit card", "coventry cc",
-      "hlam", "savin", "savings",
-      "pension", "investment",
+      "hlam",
       "overdraft",
       "standing order", "direct debit",
       "tesco bank",
@@ -113,7 +112,6 @@
       "vinted", "shein",
       "klarna*",
       "bloomingdale", "groupon",
-      "pets at home", "pet shop",
       "max spielmann",
       "british supplem"
     ]
@@ -137,6 +135,71 @@
       "ticketmaster", "eventbrite",
       "steam", "playstation", "xbox", "nintendo",
       "groupon"
+    ]
+  },
+  {
+    "category": "Vacation & Travel",
+    "colour": "#f97316",
+    "keywords": [
+      "booking.com", "airbnb", "hotel", "expedia", "hotels.com", "trivago",
+      "holiday", "easyjet", "ryanair", "british airways", "ba.com", "jet2",
+      "tui", "thomascook", "virgin atlantic",
+      "airport", "heathrow", "gatwick", "stansted",
+      "travel insurance", "passport",
+      "eurostar", "ferry", "p&o", "stena",
+      "currency", "foreign currency", "moneycorp",
+      "holiday inn", "marriott", "hilton", "premier inn"
+    ]
+  },
+  {
+    "category": "Education",
+    "colour": "#0ea5e9",
+    "keywords": [
+      "school", "university", "college", "tuition",
+      "tutoring", "tutor",
+      "udemy", "coursera", "skillshare", "linkedin learning",
+      "waterstone", "waterstones", "book", "kindle",
+      "stationery", "WHSmith", "ryman",
+      "exam fee", "revision"
+    ]
+  },
+  {
+    "category": "Kids Activities",
+    "colour": "#a3e635",
+    "keywords": [
+      "swimming lesson", "swim school",
+      "football club", "gymnastics", "dance class", "ballet",
+      "scouts", "brownies", "cubs",
+      "nursery", "childcare", "childminder", "wraparound",
+      "kids club", "after school",
+      "toys r us", "smyths", "the entertainer",
+      "softplay", "soft play", "trampoline park", "adventure",
+      "birthday party", "party supplies"
+    ]
+  },
+  {
+    "category": "Pets",
+    "colour": "#84cc16",
+    "keywords": [
+      "pets at home", "pet shop", "pet store",
+      "vet", "veterinary", "vets4pets", "medivet", "vets now",
+      "pet food", "pedigree", "whiskas",
+      "pdsa", "rspca",
+      "dog grooming", "dog walker", "cattery", "kennels",
+      "pet insurance"
+    ]
+  },
+  {
+    "category": "Savings & Investments",
+    "colour": "#10b981",
+    "keywords": [
+      "savings", "savin", "save",
+      "pension", "retirement",
+      "investment", "invest",
+      "stocks", "shares", "isa", "sipp",
+      "vanguard", "hargreaves lansdown", "hl invest",
+      "nutmeg", "moneybox", "plum",
+      "premium bond", "ns&i"
     ]
   },
   {
