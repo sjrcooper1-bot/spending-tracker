@@ -193,6 +193,11 @@ export default function App() {
         )}
 
       </main>
+
+      <footer className="text-center text-xs text-gray-400 py-6 border-t border-gray-200 mt-4">
+        <p>All data stays in your browser. Nothing is sent anywhere.</p>
+        <p className="mt-1 opacity-60">v1.5 · 23 Apr 2026</p>
+      </footer>
     </div>
   );
 }

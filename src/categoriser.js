@@ -14,8 +14,12 @@ export const DEFAULT_RULES = [
   { category: 'Shopping',        keywords: ['amazon', 'ebay', 'asos', 'next', 'primark', 'h&m', 'zara', 'argos', 'currys', 'john lewis', 'ikea', 'b&q', 'homebase'] },
   { category: 'Healthcare',      keywords: ['pharmacy', 'boots', 'lloyds pharmacy', 'superdrug', 'dentist', 'doctor', 'nhs', 'optician', 'specsavers'] },
   { category: 'Entertainment',   keywords: ['cinema', 'vue', 'odeon', 'cineworld', 'theatre', 'ticketmaster', 'eventbrite', 'steam', 'playstation', 'xbox', 'nintendo'] },
-  { category: 'Finance',         keywords: ['bank charge', 'interest', 'overdraft', 'transfer', 'standing order', 'direct debit', 'savings', 'investment', 'pension'] },
-  { category: 'Income',          keywords: ['salary', 'wages', 'payroll', 'bacs credit', 'faster payment received', 'interest credit'] },
+  { category: 'Finance',             keywords: ['bank charge', 'interest', 'overdraft', 'transfer', 'standing order', 'direct debit', 'pension'] },
+  { category: 'Savings & Investments', keywords: ['savings', 'investment', 'vanguard', 'hargreaves lansdown', 'hl direct', 'trading 212', 'nutmeg', 'moneybox', 'stocks', 'shares isa', 'lifetime isa'] },
+  { category: 'Vacation & Travel',  keywords: ['airbnb', 'booking.com', 'hotels.com', 'expedia', 'holiday inn', 'marriott', 'travelodge', 'premier inn', 'ryanair', 'easyjet', 'british airways', 'jet2', 'tui', 'airport', 'heathrow', 'gatwick', 'stansted', 'passport', 'travel insurance', 'foreign currency'] },
+  { category: 'Pets',               keywords: ['pet', 'vets', 'veterinary', 'vets4pets', 'pdsa', 'rspca', 'pets at home', 'petsmart', 'dog food', 'cat food', 'kennel', 'grooming'] },
+  { category: 'Kids',               keywords: ['toys r us', 'smyths', 'early learning', 'school', 'nursery', 'childcare', 'baby', 'mothercare', 'jojo maman', 'children', 'kids club', 'swimming lesson', 'tutoring'] },
+  { category: 'Income',             keywords: ['salary', 'wages', 'payroll', 'bacs credit', 'faster payment received', 'interest credit'] },
 ];
 
 /**
